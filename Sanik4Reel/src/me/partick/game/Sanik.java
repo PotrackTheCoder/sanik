@@ -27,12 +27,9 @@ public class Sanik extends JFrame implements Runnable {
 	private boolean isSelecting = false;
 	public boolean levelOne = false;
 	private boolean gameStarted = false;
-	// Character
-	private int charX = 400;
-	private int charY = 300;
-	ImageIcon image = new ImageIcon(getClass().getResource("/Character.png"));
-	Image img = image.getImage();
+	
 	// Objects
+	Player p = new Player(368, 268);
 	LevelOne LO = new LevelOne();
 
 	// Methods
@@ -77,7 +74,9 @@ public class Sanik extends JFrame implements Runnable {
 			g.setColor(Color.CYAN);
 			g.fillRect(0, 0, 800, 600);
 			// Creating the player
-			g.drawImage(img, charX, charY, this);
+			p.drawPlayer1(g);
+			
+			//g.drawImage(img, charX, charY, this);
 
 		}
 		// temp
@@ -129,19 +128,18 @@ public class Sanik extends JFrame implements Runnable {
 			}
 			//Character Movement
 			if (k == KeyEvent.VK_UP && gameStarted == true) {
-				charY += -5;
+				p.setYDirection(-6);
 
 			}
 			if (k == KeyEvent.VK_DOWN && gameStarted == true) {
-				charY += 5;
+				p.setYDirection(+6);
 
 			}
 			if (k == KeyEvent.VK_LEFT && gameStarted == true) {
-				charX += -5;
-
+				p.setXDirection(-6);
 			}
 			if (k == KeyEvent.VK_RIGHT && gameStarted == true) {
-				charX += 5;
+				p.setXDirection(+6);
 
 			}
 		}
@@ -187,7 +185,11 @@ public class Sanik extends JFrame implements Runnable {
 
 	public void run() {
 		try {
+			while(true){
+				
+				p.move();
 			Thread.sleep(15);
+			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
