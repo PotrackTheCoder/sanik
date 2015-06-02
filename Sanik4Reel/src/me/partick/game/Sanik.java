@@ -9,14 +9,13 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 
+
 public class Sanik extends JFrame implements Runnable {
 	// I don't know what this does
 	private static final long serialVersionUID = 3743084572020436043L;
 	///////////////////////////////
 
 	private int choice = 0;
-
-	//Not So Ghetto Game States
 	public String[] gameState = { "Play", "Level Select", "Quit" };
 	
 	///////////////////////////////
@@ -25,6 +24,8 @@ public class Sanik extends JFrame implements Runnable {
 
 	private boolean isSelecting = false;
 	
+	
+	//Methods
 	public Sanik() {
 		setTitle("Sanik Speyd Advantur");
 		setSize(800, 600);
@@ -50,11 +51,11 @@ public class Sanik extends JFrame implements Runnable {
 		g.fillRect(0, 0, 800, 600);
 		// Char
 		g.setColor(Color.cyan);
-
 		for (int i = 0; i < gameState.length; i++) {
 
 			if (i == choice) {
-
+				
+				
 				g.setColor(Color.CYAN);
 			} else {
 
@@ -73,6 +74,7 @@ public class Sanik extends JFrame implements Runnable {
 		Sanik sanik = new Sanik();
 		Thread t1 = new Thread(sanik);
 		t1.start();
+		
 
 	}
 
@@ -81,27 +83,27 @@ public class Sanik extends JFrame implements Runnable {
 			int k = e.getKeyCode();
 			selected();
 
-			if (k == e.VK_UP) {
+			if (k == KeyEvent.VK_UP) {
 				choice--;
 				if(choice == -1){
 					
 					choice = gameState.length - 1;
 				}
 			}
-			if (k == e.VK_DOWN) {
+			if (k == KeyEvent.VK_DOWN) {
 				choice ++;
 				if(choice == gameState.length){
 					
 					choice = 0;
 				}
 			}
-			if (k == e.VK_RIGHT) {
+			if (k == KeyEvent.VK_RIGHT) {
 
 			}
-			if (k == e.VK_LEFT) {
+			if (k == KeyEvent.VK_LEFT) {
 
 			}
-			if(k == e.VK_ENTER){
+			if(k == KeyEvent.VK_ENTER){
 				isSelecting = true;
 				
 			}
@@ -110,19 +112,19 @@ public class Sanik extends JFrame implements Runnable {
 		public void keyReleased(KeyEvent e) {
 			int k = e.getKeyCode();
 
-			if (k == e.VK_UP) {
+			if (k == KeyEvent.VK_UP) {
 
 			}
-			if (k == e.VK_DOWN) {
+			if (k == KeyEvent.VK_DOWN) {
 
 			}
-			if (k == e.VK_RIGHT) {
+			if (k == KeyEvent.VK_RIGHT) {
 
 			}
-			if (k == e.VK_LEFT) {
+			if (k == KeyEvent.VK_LEFT) {
 
 			}
-			if(k == e.VK_ENTER){
+			if(k == KeyEvent.VK_ENTER){
 				isSelecting = true;
 			}
 
@@ -149,7 +151,6 @@ public class Sanik extends JFrame implements Runnable {
 	}
 
 	public void run() {
-
 		try {
 			Thread.sleep(15);
 		} catch (InterruptedException e) {
