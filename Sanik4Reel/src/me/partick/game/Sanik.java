@@ -7,28 +7,32 @@ import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-
 
 public class Sanik extends JFrame implements Runnable {
 	// I don't know what this does
 	private static final long serialVersionUID = 3743084572020436043L;
-	///////////////////////////////
 
+	// Level Selection/Options
 	private int choice = 0;
 	public String[] gameState = { "Play", "Level Select", "Quit" };
-	
-	///////////////////////////////
+
 	Image dbi;
 	Graphics dbg;
 
 	private boolean isSelecting = false;
 	public boolean levelOne = false;
-	
-	//Objects
+	private boolean gameStarted = false;
+	// Character
+	private int charX = 400;
+	private int charY = 300;
+	ImageIcon image = new ImageIcon(getClass().getResource("/Character.png"));
+	Image img = image.getImage();
+	// Objects
 	LevelOne LO = new LevelOne();
-	
-	//Methods
+
+	// Methods
 	public Sanik() {
 		setTitle("Sanik Speyd Advantur");
 		setSize(800, 600);
@@ -57,8 +61,7 @@ public class Sanik extends JFrame implements Runnable {
 		for (int i = 0; i < gameState.length; i++) {
 
 			if (i == choice) {
-				
-				
+
 				g.setColor(Color.CYAN);
 			} else {
 
@@ -67,8 +70,19 @@ public class Sanik extends JFrame implements Runnable {
 			g.setFont(new Font("Comic Sans MS", Font.BOLD, 48));
 			g.drawString("- " + gameState[i], 220, 440 + i * 48);
 		}
+		if (levelOne) {
+			g.setColor(Color.CYAN);
+			g.fillRect(0, 0, 800, 600);
+			// Creating the player
+			g.drawImage(img, charX, charY, this);
 
-		// /////////////////////////////////////
+		}
+		// temp
+		if (levelOne == true) {
+			gameStarted = true;
+			isSelecting = false;
+		}
+
 		repaint();
 
 	}
@@ -77,7 +91,6 @@ public class Sanik extends JFrame implements Runnable {
 		Sanik sanik = new Sanik();
 		Thread t1 = new Thread(sanik);
 		t1.start();
-		
 
 	}
 
@@ -86,29 +99,47 @@ public class Sanik extends JFrame implements Runnable {
 			int k = e.getKeyCode();
 			selected();
 
-			if (k == KeyEvent.VK_UP) {
+			if (k == KeyEvent.VK_UP && gameStarted == false) {
 				choice--;
-				if(choice == -1){
-					
+				if (choice == -1) {
+
 					choice = gameState.length - 1;
 				}
 			}
-			if (k == KeyEvent.VK_DOWN) {
-				choice ++;
-				if(choice == gameState.length){
-					
+			if (k == KeyEvent.VK_DOWN && gameStarted == false) {
+				choice++;
+				if (choice == gameState.length) {
+
 					choice = 0;
 				}
+				//Main Menu Selection
 			}
-			if (k == KeyEvent.VK_RIGHT) {
+			if (k == KeyEvent.VK_RIGHT && gameStarted == false) {
 
 			}
-			if (k == KeyEvent.VK_LEFT) {
+			if (k == KeyEvent.VK_LEFT && gameStarted == false) {
 
 			}
-			if(k == KeyEvent.VK_ENTER){
+			if (k == KeyEvent.VK_ENTER && gameStarted == false) {
 				isSelecting = true;
-				
+
+			}
+			//Character Movement
+			if (k == KeyEvent.VK_UP && gameStarted == true) {
+				charY += -5;
+
+			}
+			if (k == KeyEvent.VK_DOWN && gameStarted == true) {
+				charY += 5;
+
+			}
+			if (k == KeyEvent.VK_LEFT && gameStarted == true) {
+				charX += -5;
+
+			}
+			if (k == KeyEvent.VK_RIGHT && gameStarted == true) {
+				charX += 5;
+
 			}
 		}
 
@@ -127,27 +158,26 @@ public class Sanik extends JFrame implements Runnable {
 			if (k == KeyEvent.VK_LEFT) {
 
 			}
-			if(k == KeyEvent.VK_ENTER){
-				
+			if (k == KeyEvent.VK_ENTER) {
+
 			}
 
 		}
-		private void selected(){
-			if(choice == 0 && isSelecting){
+
+		private void selected() {
+			if (choice == 0 && isSelecting) {
 				levelOne = true;
 			}
-			
-			if(choice == 1 && isSelecting){
-				
-				
+
+			if (choice == 1 && isSelecting) {
+
 			}
-			
-			if(choice == 2 && isSelecting){
-				
+
+			if (choice == 2 && isSelecting) {
+
 				System.exit(0);
-			}			
-			
-			
+			}
+
 		}
 
 	}
