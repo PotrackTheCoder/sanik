@@ -23,7 +23,10 @@ public class Sanik extends JFrame implements Runnable {
 	Graphics dbg;
 
 	private boolean isSelecting = false;
+	public boolean levelOne = false;
 	
+	//Objects
+	LevelOne LO = new LevelOne();
 	
 	//Methods
 	public Sanik() {
@@ -125,14 +128,13 @@ public class Sanik extends JFrame implements Runnable {
 
 			}
 			if(k == KeyEvent.VK_ENTER){
-				isSelecting = true;
+				
 			}
 
 		}
 		private void selected(){
 			if(choice == 0 && isSelecting){
-				
-				
+				levelOne = true;
 			}
 			
 			if(choice == 1 && isSelecting){
