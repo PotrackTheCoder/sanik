@@ -17,7 +17,10 @@ public class Sanik extends JFrame implements Runnable {
 	// Level Selection/Options
 	private int choice = 0;
 	public String[] gameState = { "Play", "Level Select", "Quit" };
-
+	//Main Menu
+	ImageIcon main = new ImageIcon(getClass().getResource("/mainMenu.png"));
+	Image Menu = main.getImage();
+	
 	Image dbi;
 	Graphics dbg;
 
@@ -56,8 +59,8 @@ public class Sanik extends JFrame implements Runnable {
 		// Background
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 800, 600);
-		// Char
-		g.setColor(Color.cyan);
+		//Main Menu
+		g.drawImage(Menu, 225, 100, this);
 		for (int i = 0; i < gameState.length; i++) {
 
 			if (i == choice) {
